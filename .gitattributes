@@ -1,4 +1,9 @@
+# Ignorér Tailwind-output som sprog
 static/css/output.css linguist-vendored
 *.css linguist-generated
 
+# Ignorér genererede HTML (templates) fra sprogstatistik
+templates/*.html linguist-vendored
+
+# Tving Python som primær
 *.py linguist-language=Python
