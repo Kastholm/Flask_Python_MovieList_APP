@@ -1,23 +1,21 @@
+import os
 import requests
-import datetime
+from dotenv import load_dotenv
 
-date = datetime.datetime.now()
+load_dotenv()
+api_key = os.getenv("OMDB_API")
 
 api_params = {
     "url": "http://www.omdbapi.com/",
-    "key": "1234",
+    "key": api_key,
     "page": "1"
 }
 
-def get_movie(title):
+def search_movie(title):
     r = requests.get(
     f"{api_params['url']}?apikey={api_params['key']}&t={title}&page={api_params['page']}"
     )
 
+    print(r.json())
+
     return r.status_code, r.json()
-
-
-def save_movie(status):
-
-    if status == 200:
-        print('movie added')

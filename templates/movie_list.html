@@ -1,0 +1,122 @@
+<!-- templates/search.html -->
+<!doctype html>
+<html>
+  <link rel="stylesheet" href="../static/css/output.css">
+  <body class=" p-12 w-screen h-screen overflow-x-clip bg-cyan-700 grid place-content-center">
+    
+    <section class="m-auto grid place-content-center">
+        <div class="flex items-center m-auto gap-2 mb-6">
+            <a href="/">
+              <button
+                class="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#06B6D4] h-9 rounded-md px-3"
+              >
+                <svg
+                  class="lucide lucide-rocket text-cyan-500 dark:text-cyan-400"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                  stroke="#06B6D4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  height="22"
+                  width="22"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                  ></path>
+                  <path
+                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                  ></path>
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                </svg>
+                Search movies
+              </button>
+            </a>
+            <a href="/movie_list">
+              <button
+                class="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#60A5FA] h-9 rounded-md px-3"
+              >
+                <svg
+                  class="lucide lucide-newspaper text-blue-400 dark:text-blue-600"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                  stroke="#60A5FA"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  height="22"
+                  width="22"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                <path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4"/><path d="M10 22 9 8"/><path d="m14 22 1-14"/><path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z"/>
+                </svg>
+                Movie list
+              </button>
+            </a>
+            <a href="/stats">
+              <button
+              class="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#FB923C] h-9 rounded-md px-3"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400 dark:text-orange-600 lucide lucide-chart-column-icon lucide-chart-column"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+              Movies Stats
+            </button>
+            </a>
+          </div>
+
+
+      <h1 class="text-center font-extrabold text-3xl text-white mb-4">Your Movie List</br>Get an overview over you favourite movies </h1>
+      
+    </section>
+
+    {% if movies %}
+    <section class="min-h-[500px] max-w-[95vw] h-fit mt-4 w-fit rounded-md p-8 bg-cyan-800">
+        <ul class="grid place-content-center grid-cols-4 gap-4">
+          {% for m in movies %}
+            <li class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-64">
+              <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-52">
+                  <img
+                      src={{m[4]}}
+                      alt="card-image" class="object-cover w-full h-full" />
+              </div>
+              <div class="p-6">
+                  <div class="flex items-center justify-between mb-2">
+                      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+                        {{ m[1] }}
+                      </p>
+                      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+                        ({{ m[2] }})
+                      </p>
+                  </div>
+                  <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75 h-[100px] max-h-[100px] overflow-clip">
+                      {{ m[3] }}
+                  </p>
+              </div>
+              <form method="post" action="/delete" class="p-6 pt-0">
+                <input type="hidden" name="id" value="{{ m[0] }}">
+                <button
+                    class="align-middle bg-red-300 select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
+                    type="submit">
+                    Delete Movie
+                </button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+      <aside class="grid place-content-center h-full text-center">
+        {% if status %}
+          <p class="text-gray-400 text-lg">Movie was added successfully!</p>
+          <p class="text-gray-400">Search for a new movie above..</p>
+          <button>Visit your favourite movielist</button>
+        {% else %}
+          <p class="text-gray-400 text-lg">Available movie results will display here</p>
+          <p class="text-gray-400">Search for a movie above..</p>
+        {% endif %}
+      </aside>
+      {% endif %}
+    </section>
+
+  </body>
+</html>
