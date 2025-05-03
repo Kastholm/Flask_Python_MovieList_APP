@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: api_agent
+Version: 0.1.0
+Summary: Api Agent for movies
+Author-email: Marc <your.email@example.com>
+Requires-Dist: Flask>=3.1.0
+Requires-Dist: requests>=2.32.3
