@@ -1,0 +1,4 @@
+static/css/output.css linguist-vendored
+*.css linguist-generated
+
+*.py linguist-language=Python
