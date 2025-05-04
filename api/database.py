@@ -12,7 +12,7 @@ def conn_to_db():
             host="Kastholm.mysql.pythonanywhere-services.com",
             user="Kastholm",
             password=password,
-            database="movies_db"
+            database="Kastholm$movies_db"
         )
         if conn.is_connected():
             print('Connection to DB Established')
