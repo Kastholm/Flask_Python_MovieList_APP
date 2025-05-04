@@ -9,8 +9,8 @@ password = os.getenv("DB_PW")
 def conn_to_db():
     try:
         conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
+            host="Kastholm.mysql.pythonanywhere-services.com",
+            user="Kastholm",
             password=password,
             database="movies_db"
         )
