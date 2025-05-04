@@ -9,6 +9,7 @@ from flask import Flask, render_template, request
 from api import search_movie, fetch_all_movies, post_movie, delete_movie, fetch_movie_genres
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
 
 @app.route('/')
 def index():
