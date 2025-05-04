@@ -1,7 +1,7 @@
 [project]
-name = "api_agent"
+name = "Favourite_movie_app"
 version = "0.1.0"
-description = "Api Agent for movies"
+description = "Fullstack App for a movie app"
 authors = [
     {name = "Marc", email = "your.email@example.com"}
 ]
