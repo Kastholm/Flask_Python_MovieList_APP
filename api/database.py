@@ -43,7 +43,7 @@ def post_movie(id, title, year, plot, poster, director, genre_str, awards, ratin
     # Add Movie without Genre
     dist.execute(
         """
-        INSERT IGNORE INTO Movie
+        INSERT IGNORE INTO movie
           (imdbID, Title, Year, Plot, Poster, Director, Awards, Rating)
         VALUES
           (%s, %s, %s, %s, %s, %s, %s, %s)
@@ -54,13 +54,13 @@ def post_movie(id, title, year, plot, poster, director, genre_str, awards, ratin
     genres = [g.strip() for g in genre_str.split(',')]
     for g in genres:
         # opret genre hvis ikke findes
-        dist.execute("INSERT IGNORE INTO Genre (name) VALUES (%s)", (g,))
+        dist.execute("INSERT IGNORE INTO genre (name) VALUES (%s)", (g,))
         # hent genre_id
-        dist.execute("SELECT id FROM Genre WHERE name=%s", (g,))
+        dist.execute("SELECT id FROM genre WHERE name=%s", (g,))
         genre_id = dist.fetchone()[0]
         # link film og genre
         dist.execute(
-            "INSERT IGNORE INTO MovieGenre (movie_id, genre_id) VALUES (%s, %s)",
+            "INSERT IGNORE INTO moviegenre (movie_id, genre_id) VALUES (%s, %s)",
             (id, genre_id)
         )
 
@@ -76,7 +76,7 @@ def delete_movie(id):
     dist = conn.cursor()
 
     dist.execute(
-        "DELETE FROM Movie WHERE imdbID = %s",
+        "DELETE FROM movie WHERE imdbID = %s",
         (id,)
     )
 
@@ -89,8 +89,8 @@ def fetch_movie_genres():
     dist = conn.cursor()
     dist.execute("""
       SELECT g.name, COUNT(*) 
-      FROM Genre g
-      JOIN MovieGenre mg ON g.id = mg.genre_id
+      FROM genre g
+      JOIN moviegenre mg ON g.id = mg.genre_id
       GROUP BY g.id
     """)
     data = dist.fetchall() 
